@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 const SortIcon = ({sortDirection}) => {
   return (
-    <span>{sortDirection}</span>
+    <i className={`material-icons sortIcon sortIcon--${sortDirection}`}>play_arrow</i>
   )
 };
 export default SortIcon;

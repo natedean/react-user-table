@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import UserTable from './components/UserTable';
+import TopLoadingIndicator from './components/TopLoadingIndicator';
 
 class App extends Component {
 
@@ -37,6 +38,7 @@ class App extends Component {
 
       return {
         users: [],
+        isLoading: true,
         sortField,
         sortDirection
       }
@@ -79,7 +81,9 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
-        {this.state.isLoading && <p>Loading...</p>}
+        <div className="topSection">
+          <TopLoadingIndicator isLoading={this.state.isLoading} />
+        </div>
         <UserTable {...this.state} handleColumnHeaderClick={this.handleColumnHeaderClick} />
       </div>
     );

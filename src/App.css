@@ -2,7 +2,42 @@ th {
   cursor: pointer;
 }
 
+table {
+  position: relative;
+}
+
+tr {
+  display: flex;
+}
+
+th {
+  position: relative;
+}
+
 td,
 th {
   min-width: calc(100% / 5)
 }
+
+.topSection {
+  min-height: 1em;
+  position: relative;
+}
+
+.sortIcon {
+  font-size: 1.3rem;
+  position: absolute;
+  left: -0.7em;
+  top: 1em;
+  transition: 0.75s transform;
+  color: teal;
+}
+
+.sortIcon--desc {
+  transform: rotate(90deg);
+}
+
+.sortIcon--asc {
+  transform: rotate(-90deg);
+}
+
