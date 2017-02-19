@@ -16,7 +16,10 @@ th {
 
 td,
 th {
-  min-width: calc(100% / 5)
+  min-width: calc(100% / 5);
+  overflow: hidden;
+  padding-right: 1em;
+  padding-left: 1em;
 }
 
 .topSection {

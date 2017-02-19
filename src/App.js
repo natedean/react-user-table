@@ -13,9 +13,9 @@ class App extends Component {
       users: [],
       isLoading: true,
       errorText: null,
-      sortField: '_created_at',
+      sortField: '_updated_at',
       sortDirection: 'desc',
-      columns: ['username', '_id', '_created_at', '_updated_at', 'gtScore']
+      columns: ['username', '_created_at', '_updated_at', 'gtScore']
     };
 
     this.handleColumnHeaderClick = this.handleColumnHeaderClick.bind(this);
@@ -47,7 +47,7 @@ class App extends Component {
 
   fetchUsers(sortField, sortDirection) {
     const queryParams = `?sortField=${sortField}&sortDirection=${sortDirection}`;
-    fetch(`https://gt-users-service-reiyyupzic.now.sh/users${queryParams}`)
+    fetch(`http://localhost:3001/users${queryParams}`)
     // fetch(`http://localhost:3001/users${queryParams}`)
     .then(res => {
         return res.json();
