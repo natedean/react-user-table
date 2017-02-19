@@ -47,7 +47,7 @@ class App extends Component {
 
   fetchUsers(sortField, sortDirection) {
     const queryParams = `?sortField=${sortField}&sortDirection=${sortDirection}`;
-    fetch(`http://localhost:3001/users${queryParams}`)
+    fetch(`https://api.guitarthinker.com/users${queryParams}`)
     // fetch(`http://localhost:3001/users${queryParams}`)
     .then(res => {
         return res.json();

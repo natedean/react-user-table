@@ -17,9 +17,6 @@ th {
 td,
 th {
   min-width: calc(100% / 5);
-  overflow: hidden;
-  padding-right: 1em;
-  padding-left: 1em;
 }
 
 .topSection {
@@ -31,16 +28,17 @@ th {
   font-size: 1.3rem;
   position: absolute;
   left: -0.7em;
-  top: 1em;
-  transition: 0.75s transform;
+  transition: 0.75s all;
   color: teal;
 }
 
 .sortIcon--desc {
   transform: rotate(90deg);
+  top: 0.9em;
 }
 
 .sortIcon--asc {
+  top: 1.05em;
   transform: rotate(-90deg);
 }
 
