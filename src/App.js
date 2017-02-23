@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from './api';
 import './App.css';
 
 import UserTable from './components/UserTable';
@@ -32,8 +33,6 @@ class App extends Component {
       const sortField = column;
       const sortDirection = sortField === prevState.sortField ? reverseSortDirection(prevState.sortDirection) : 'desc';
 
-      console.log(sortField, sortDirection);
-
       this.fetchUsers(sortField, sortDirection);
 
       return {
@@ -46,25 +45,8 @@ class App extends Component {
   }
 
   fetchUsers(sortField, sortDirection) {
-    const queryParams = `?sortField=${sortField}&sortDirection=${sortDirection}`;
-    fetch(`https://api.guitarthinker.com/users${queryParams}`)
-    // fetch(`http://localhost:3001/users${queryParams}`)
-    .then(res => {
-        return res.json();
-      })
+      api.fetchUsers(sortField, sortDirection)
       .then(res => {
-        return res.map(user => {
-          const createdAtDate = new Date(user._created_at);
-          const updatedAtDate = new Date(user._updated_at);
-
-          return Object.assign({}, user, {
-            _created_at: new Intl.DateTimeFormat('en-US').format(createdAtDate),
-            _updated_at: new Intl.DateTimeFormat('en-US').format(updatedAtDate)
-          });
-        })
-      })
-      .then(res => {
-        console.log(res);
         this.setState({
           users: res,
           isLoading: false

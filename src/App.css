@@ -29,7 +29,7 @@ th {
   position: absolute;
   left: -0.7em;
   transition: 0.75s all;
-  color: teal;
+  color: #ffcc80;
 }
 
 .sortIcon--desc {
