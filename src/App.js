@@ -16,7 +16,7 @@ class App extends Component {
       errorText: null,
       sortField: '_updated_at',
       sortDirection: 'desc',
-      columns: ['username', '_created_at', '_updated_at', 'gtScore']
+      columns: ['username', '_created_at', '_updated_at', 'totalCorrect', 'totalIncorrect']
     };
 
     this.handleColumnHeaderClick = this.handleColumnHeaderClick.bind(this);

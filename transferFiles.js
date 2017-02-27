@@ -3,7 +3,7 @@ const path = require('path');
 const cheerio = require('cheerio');
 const projectName = JSON.parse(fs.readFileSync('package.json', 'utf8')).name;
 
-const destRoot = path.relative(__dirname, '/Users/nate.dean/Nate/ejs_gt');
+const destRoot = path.relative(__dirname, process.env.GT_PATH);
 
 const srcCssPath = './build/static/css';
 const srcJsPath = './build/static/js';
