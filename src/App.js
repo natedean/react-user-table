@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import api from './api';
 import './App.css';
 
-import UserTable from './components/UserTable';
+import TopStatsContainer from './components/TopStats/TopStatsContainer';
+import UserTableContainer from './components/UserTable/UserTableContainer';
+import QuestionTableContainer from './components/QuestionTable/QuestionTableContainer';
 import TopLoadingIndicator from './components/TopLoadingIndicator';
 
 class App extends Component {
@@ -11,53 +12,30 @@ class App extends Component {
     super(props);
 
     this.state = {
-      users: [],
-      isLoading: true,
-      errorText: null,
-      sortField: '_updated_at',
-      sortDirection: 'desc',
-      columns: ['username', '_created_at', '_updated_at', 'totalCorrect', 'totalIncorrect']
+      selectedTable: 'user',
+      isLoading: false
     };
 
-    this.handleColumnHeaderClick = this.handleColumnHeaderClick.bind(this);
-    this.fetchUsers = this.fetchUsers.bind(this);
+    this.setIsLoading = this.setIsLoading.bind(this);
+    this.setSelectedTable = this.setSelectedTable.bind(this);
+    this.setTable = this.setTable.bind(this);
   }
 
-  componentDidMount() {
-    this.fetchUsers(this.state.sortField, this.state.sortDirection);
+  setIsLoading(isLoading) {
+    this.setState(() => ({ isLoading }));
   }
 
-  handleColumnHeaderClick(column) {
-    this.setState(prevState => {
-
-      const sortField = column;
-      const sortDirection = sortField === prevState.sortField ? reverseSortDirection(prevState.sortDirection) : 'desc';
-
-      this.fetchUsers(sortField, sortDirection);
-
-      return {
-        users: [],
-        isLoading: true,
-        sortField,
-        sortDirection
-      }
-    });
+  setSelectedTable(selectedTable) {
+    this.setState(() => ({ selectedTable }));
   }
 
-  fetchUsers(sortField, sortDirection) {
-      api.fetchUsers(sortField, sortDirection)
-      .then(res => {
-        this.setState({
-          users: res,
-          isLoading: false
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          isLoading: false,
-          errorText: err.message || err
-        });
-      })
+  setTable(selectedTable) {
+    switch (selectedTable) {
+      case 'user':
+        return <UserTableContainer setIsLoading={this.setIsLoading} />;
+      case 'question':
+        return <QuestionTableContainer setIsLoading={this.setIsLoading} />;
+    }
   }
 
   render() {
@@ -66,13 +44,30 @@ class App extends Component {
         <div className="topSection">
           <TopLoadingIndicator isLoading={this.state.isLoading} />
         </div>
-        <UserTable {...this.state} handleColumnHeaderClick={this.handleColumnHeaderClick} />
+        <TopStatsContainer setIsLoading={this.setIsLoading} />
+        <div className="tablesContainer">
+          <div className="tablesContainer__btnRow">
+            <button
+              className={`btn tablesContainer__btn btn-flat${setBtnClass(this.state.selectedTable, 'user')}`}
+              onClick={() => this.setSelectedTable('user')}
+            >
+              User Table
+            </button>
+            <button className={`btn tablesContainer__btn btn-flat${setBtnClass(this.state.selectedTable, 'question')}`}
+              onClick={() => this.setSelectedTable('question')}
+            >
+              Question Table
+            </button>
+          </div>
+          { this.setTable(this.state.selectedTable) }
+        </div>
       </div>
     );
   }
 }
+
 export default App;
 
-function reverseSortDirection(dir) {
-  return dir === 'desc' ? 'asc' : 'desc';
+function setBtnClass(selectedTable, currBtn) {
+  return selectedTable === currBtn ? ' tablesContainer__btn--active' : '';
 }

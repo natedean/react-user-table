@@ -42,3 +42,20 @@ th {
   transform: rotate(-90deg);
 }
 
+.tablesContainer {
+  margin-top: 2rem;
+}
+
+.tablesContainer__btnRow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tablesContainer__btn + .tablesContainer__btn {
+  margin-left: 2rem;
+}
+
+.tablesContainer__btn--active {
+  border-bottom: 2px solid #ffcc80;
+}

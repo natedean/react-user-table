@@ -1,7 +1,6 @@
-const fetchUsers = (sortField, sortDirection) => {
+export const fetchUsers = (sortField, sortDirection) => {
   const queryParams = `?sortField=${sortField}&sortDirection=${sortDirection}`;
   return fetch(`https://api.guitarthinker.com/users${queryParams}`)
-  // return fetch(`http://localhost:3001/users${queryParams}`)
     .then(res => {
       return res.json();
     })
@@ -15,6 +14,11 @@ const fetchUsers = (sortField, sortDirection) => {
     })
 };
 
-export default {
-  fetchUsers
-}
+export const fetchQuestions = () => {
+  return fetch(`https://api.guitarthinker.com/questions`)
+    .then(res => {
+      return res.json();
+    })
+    .then(questions => questions.sort((a, b) => a.difficulty - b.difficulty))
+
+};
